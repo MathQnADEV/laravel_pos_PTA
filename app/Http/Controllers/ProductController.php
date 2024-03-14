@@ -33,7 +33,7 @@ class ProductController extends Controller
         ]);
         $filename = time() . '.' . $request->image->extension();
         $request->image->storeAs('public/products', $filename);
-        $data = $request->all();
+        // $data = $request->all();
 
         $product = new Product();
         $product->name = $request->name;
