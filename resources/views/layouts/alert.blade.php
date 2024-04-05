@@ -4,7 +4,7 @@
             <button class="close"data-dismiss="alert">
                 <span>x</span>
             </button>
-            <p>{{ $message }}</p>
+            <p style="font-size: 20px">{{ $message }}</p>
         </div>
     </div>
 @endif

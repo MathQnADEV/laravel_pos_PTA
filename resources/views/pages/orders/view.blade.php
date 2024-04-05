@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Order Detail')
+@section('title', 'Detail Pesanan')
 
 @push('style')
     <!-- CSS Libraries -->
@@ -11,13 +11,7 @@
     <div class="main-content">
         <section class="section">
             <div class="section-header">
-                <h1>Order Detail</h1>
-                <div class="section-header-breadcrumb">
-                    <div class="breadcrumb-item active"><a href="#">Dashboard</a></div>
-                    <div class="breadcrumb-item"><a href="#">Orders</a></div>
-                    <div class="breadcrumb-item">All Orders</div>
-                    <div class="breadcrumb-item">Order Detail</div>
-                </div>
+                <h1>Detail Pesanan</h1>
             </div>
             <div class="section-body">
                 <div class="row">
@@ -25,43 +19,41 @@
                         @include('layouts.alert')
                     </div>
                 </div>
-                <h2 class="section-title">Order Details</h2>
+                <h2 class="section-title" style="font-size: 20px">Detail Pesanan</h2>
                 <p class="section-leading">
-                <div>Total Price: {{ $order->total_price }}</div>
-                <div>Transaction Time: {{ $order->transaction_time }}</div>
-                <div>Total Item: {{ $order->total_item }}</div>
+                <div>
+                    <h6>Total Harga: Rp. {{ number_format($order->total_price, 0, ',', '.') }}</h6>
+                    <h6>Waktu Transaksi: {{ $order->transaction_time }}</h6>
+                    <h6>Total Produk: {{ $order->total_item }}</h6>
+                </div>
                 </p>
                 <div class="row mt-4">
                     <div class="col-12">
                         <div class="card">
-                            <div class="card-header">
-                                <h4>Order Details</h4>
-                            </div>
                             <div class="card-body">
                                 <div class="clearfix mb-3"></div>
                                 <div class="table-responsive">
                                     <table class="table-striped table">
-                                        <tr>
-                                            <th>Product Name</th>
-                                            <th>Price</th>
-                                            <th>Quantity</th>
-                                            <th>Total Price</th>
+                                        <tr style="font-size: 17px">
+                                            <th>Nama Produk</th>
+                                            <th>Harga</th>
+                                            <th>QTY</th>
+                                            <th>Harga Produk</th>
                                         </tr>
                                         @foreach ($orderItems as $item)
-                                            <tr>
+                                            <tr style="font-size: 16px">
                                                 <td>
                                                     {{ $item->product->name }}
                                                 </td>
                                                 <td>
-                                                    {{ $item->product->price }}
+                                                    Rp. {{ number_format($item->product->price, 0, ',', '.') }}
                                                 </td>
                                                 <td>
                                                     {{ $item->quantity }}
                                                 </td>
                                                 <td>
-                                                    {{ $item->total_price }}
+                                                    Rp. {{ number_format($item->total_price, 0, ',', '.') }}
                                                 </td>
-
                                             </tr>
                                         @endforeach
                                     </table>

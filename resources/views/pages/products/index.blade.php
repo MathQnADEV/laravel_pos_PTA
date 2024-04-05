@@ -11,14 +11,9 @@
     <div class="main-content">
         <section class="section">
             <div class="section-header">
-                <h1>Products</h1>
+                <h1>Produk</h1>
                 <div class="section-header-button">
-                    <a href="{{ route('product.create') }}" class="btn btn-primary">Add New</a>
-                </div>
-                <div class="section-header-breadcrumb">
-                    <div class="breadcrumb-item active"><a href="#">Dashboard</a></div>
-                    <div class="breadcrumb-item"><a href="#">Products</a></div>
-                    <div class="breadcrumb-item">All Products</div>
+                    <a href="{{ route('product.create') }}" class="btn btn-primary" style="font-size: 16px">Tambah Produk</a>
                 </div>
             </div>
             <div class="section-body">
@@ -27,31 +22,21 @@
                         @include('layouts.alert')
                     </div>
                 </div>
-                <h2 class="section-title">Produts</h2>
-                <p class="section-lead">
-                    You can manage all Products, such as editing, deleting and more.
+                <h2 class="section-title" style="font-size: 20px">Produk</h2>
+                <p class="section-lead" style="font-size: 15px">
+                    Anda dapat mengelola semua Produk, seperti mengedit, menghapus, dan lainnya.
                 </p>
 
 
                 <div class="row mt-4">
                     <div class="col-12">
                         <div class="card">
-                            <div class="card-header">
-                                <h4>All Products</h4>
-                            </div>
                             <div class="card-body">
-                                <div class="float-left">
-                                    <select class="form-control selectric">
-                                        <option>Action For Selected</option>
-                                        <option>Move to Draft</option>
-                                        <option>Move to Pending</option>
-                                        <option>Delete Pemanently</option>
-                                    </select>
-                                </div>
                                 <div class="float-right">
                                     <form method="GET" {{ route('product.index') }}>
                                         <div class="input-group">
-                                            <input type="text" class="form-control" placeholder="Search" name="name">
+                                            <input type="text" class="form-control" style="font-size: 16px"
+                                                placeholder="Search" name="name">
                                             <div class="input-group-append">
                                                 <button class="btn btn-primary"><i class="fas fa-search"></i></button>
                                             </div>
@@ -63,26 +48,17 @@
 
                                 <div class="table-responsive">
                                     <table class="table-striped table">
-                                        <tr>
-                                            <th>Name</th>
-                                            <th>Category</th>
-                                            <th>Price</th>
+                                        <tr style="font-size: 17px">
+                                            <th>Nama</th>
+                                            <th>Kategori</th>
+                                            <th>Harga</th>
                                             <th>Photo</th>
-                                            <th>Stock</th>
+                                            <th>Stok</th>
                                             <th>Created At</th>
                                             <th>Action</th>
                                         </tr>
-                                        {{-- <td>Laravel 5 Tutorial: Introduction
-                                            <div class="table-links">
-                                                <a href="#">View</a>
-                                                <div class="bullet"></div>
-                                                <a href="#">Edit</a>
-                                                <div class="bullet"></div>
-                                                <a href="#" class="text-danger">Trash</a>
-                                            </div>
-                                        </td> --}}
                                         @foreach ($products as $product)
-                                            <tr>
+                                            <tr style="font-size: 16px">
                                                 <td>
                                                     {{ $product->name }}
                                                 </td>
@@ -90,12 +66,12 @@
                                                     {{ $product->category }}
                                                 </td>
                                                 <td>
-                                                    {{ $product->price }}
+                                                    Rp. {{ number_format($product->price, 0, ',', '.') }}
                                                 </td>
                                                 <td>
                                                     @if ($product->image)
                                                         <img src="{{ asset('storage/products/' . $product->image) }}"
-                                                            alt="" width="100px" class="img-thumbnail">
+                                                            alt="" width="150px" class="img-thumbnail">
                                                     @else
                                                         <span class="badge badge-danger">No Image</span>
                                                     @endif
@@ -110,8 +86,8 @@
                                                     <div class="d-flex justify-content-center">
                                                         <a href='{{ route('product.edit', $product->id) }}'
                                                             class="btn btn-sm btn-info btn-icon">
-                                                            <i class="fas fa-edit"></i>
-                                                            Edit
+                                                            <i class="fas fa-edit" style="font-size: 14px"></i>
+                                                            <span style="font-size: 16px">Edit</span>
                                                         </a>
 
                                                         <form action="{{ route('product.destroy', $product->id) }}"
@@ -120,7 +96,8 @@
                                                             <input type="hidden" name="_token"
                                                                 value="{{ csrf_token() }}" />
                                                             <button class="btn btn-sm btn-danger btn-icon confirm-delete">
-                                                                <i class="fas fa-times"></i> Delete
+                                                                <i class="fas fa-times" style="font-size: 14px"></i> <span
+                                                                    style="font-size: 16px">Delete</span>
                                                             </button>
                                                         </form>
                                                     </div>

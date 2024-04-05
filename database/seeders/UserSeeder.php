@@ -13,11 +13,11 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
-        \App\Models\User::factory(10)->create();
+        // \App\Models\User::factory(10)->create();
 
         \App\Models\User::create([
             "name" => "shaq",
-            "email" => "shaqt9center@gmail.com",
+            "email" => "shaq@gmail.com",
             "password" => Hash::make("1234567890"),
             "roles" => "ADMIN",
             "phone" => "081234567890",

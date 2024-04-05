@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\Order;
 use App\Models\OrderItem;
+use App\Models\Product;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
@@ -31,12 +32,15 @@ class OrderController extends Controller
         ]);
 
         foreach ($request->order_items as $item) {
+            $product = Product::find($item['product_id']);
             OrderItem::create([
                 'order_id' => $order->id,
                 'product_id' => $item['product_id'],
                 'quantity' => $item['quantity'],
-                'total_price' => $item['total_price']
+                'total_price' => $product->price * $item['quantity']
             ]);
+            $product->stock -= $item['quantity'];
+            $product->save();
         }
 
         return response()->json([

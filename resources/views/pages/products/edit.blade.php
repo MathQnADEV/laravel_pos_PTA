@@ -16,87 +16,87 @@
     <div class="main-content">
         <section class="section">
             <div class="section-header">
-                <h1>Edit Product Form</h1>
-                <div class="section-header-breadcrumb">
-                    <div class="breadcrumb-item active"><a href="#">Dashboard</a></div>
-                    <div class="breadcrumb-item"><a href="#">Forms</a></div>
-                    <div class="breadcrumb-item">Edit Product Form</div>
-                </div>
+                <h1>Edit Produk</h1>
             </div>
 
             <div class="section-body">
-                <h2 class="section-title">Edit Product Form</h2>
-                <p class="section-lead">We provide advanced edit fields</p>
+                <h2 class="section-title" style="font-size: 20px">Edit Produk</h2>
+                <p class="section-lead"><span style="font-size: 15px">Kami menyediakan edit yang advanced</span></p>
                 <div class="card">
                     <form action="{{ route('product.update', $product) }}" method="POST">
                         @csrf
                         @method('PUT')
                         <div class="card-header">
-                            <h4>Edit Product User</h4>
+                            <h4 style="font-size: 18px">Edit Produk</h4>
                         </div>
                         <div class="card-body">
                             <div class="form-group">
-                                <label>Name</label>
+                                <label style="font-size: 16px">Nama</label>
                                 <input type="text"
                                     class="form-control @error('name')
                                 is-invalid
                             @enderror"
                                     name="name" value="{{ $product->name }}">
                                 @error('name')
-                                    <div class="invalid-feedback">
+                                    <div class="invalid-feedback" style="font-size: 16px">
                                         {{ $message }}
                                     </div>
                                 @enderror
                             </div>
-                             <div class="form-group">
-                                <label>Price</label>
+                            <div class="form-group">
+                                <label style="font-size: 16px">Harga</label>
                                 <input type="number"
                                     class="form-control @error('price')
                                 is-invalid
                             @enderror"
                                     name="price" value="{{ $product->price }}">
                                 @error('price')
-                                    <div class="invalid-feedback">
+                                    <div class="invalid-feedback" style="font-size: 16px">
                                         {{ $message }}
                                     </div>
                                 @enderror
                             </div>
                             <div class="form-group">
-                                <label>Stock</label>
+                                <label style="font-size: 16px">Stok</label>
                                 <input type="number"
                                     class="form-control @error('stock')
                                 is-invalid
                             @enderror"
                                     name="stock" value="{{ $product->stock }}">
                                 @error('stock')
-                                    <div class="invalid-feedback">
+                                    <div class="invalid-feedback" style="font-size: 16px">
                                         {{ $message }}
                                     </div>
                                 @enderror
                             </div>
                             <div class="form-group">
-                                <label class="form-label">Category</label>
+                                <label class="form-label" style="font-size: 16px">Kategori</label>
                                 <div class="selectgroup w-100">
                                     <label class="selectgroup-item">
                                         <input type="radio" name="category" value="food" class="selectgroup-input"
                                             @if ($product->category == 'food') checked @endif>
-                                        <span class="selectgroup-button">Food</span>
+                                        <span class="selectgroup-button" style="font-size: 16px">Makanan</span>
                                     </label>
                                     <label class="selectgroup-item">
                                         <input type="radio" name="category" value="drink" class="selectgroup-input"
                                             @if ($product->category == 'drink') checked @endif>
-                                        <span class="selectgroup-button">Drink</span>
+                                        <span class="selectgroup-button" style="font-size: 16px">Minuman</span>
                                     </label>
                                     <label class="selectgroup-item">
                                         <input type="radio" name="category" value="snack" class="selectgroup-input"
                                             @if ($product->category == 'snack') checked @endif>
-                                        <span class="selectgroup-button">Snack</span>
+                                        <span class="selectgroup-button" style="font-size: 16px">Snak</span>
+                                    </label>
+                                    <label class="selectgroup-item">
+                                        <input type="radio" name="category" value="other" class="selectgroup-input"
+                                            @if ($product->category == 'other') checked @endif>
+                                        <span class="selectgroup-button" style="font-size: 16px">lain-lain</span>
                                     </label>
                                 </div>
                             </div>
                         </div>
                         <div class="card-footer text-right">
-                            <button class="btn btn-primary">Submit</button>
+                            <button class="btn btn-primary" style="font-size: 16px">Submit</button>
                         </div>
                     </form>
                 </div>

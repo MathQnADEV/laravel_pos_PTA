@@ -12,7 +12,7 @@
     <div class="main-content">
         <section class="section">
             <div class="section-header">
-                <h1>Dashboard - Have A Nice Day Brooo</h1>
+                <h1>Dashboard - Semoga harimu menyenangkan brooo</h1>
             </div>
             <div class="row">
                 <div class="col-lg-3 col-md-6 col-sm-6 col-12">
@@ -22,7 +22,7 @@
                         </div>
                         <div class="card-wrap">
                             <div class="card-header">
-                                <h4>Total STAFF</h4>
+                                <h4 style="font-size: 16px">Total STAFF</h4>
                             </div>
                             <div class="card-body">
                                 {{ $users }}
@@ -37,7 +37,7 @@
                         </div>
                         <div class="card-wrap">
                             <div class="card-header">
-                                <h4>Total Products</h4>
+                                <h4 style="font-size: 16px">Total Produk</h4>
                             </div>
                             <div class="card-body">
                                 {{ $products }}
@@ -51,11 +51,11 @@
                             <i class="far fa-file"></i>
                         </div>
                         <div class="card-wrap">
-                            <div class="card-header">
-                                <h4>Total Pemasukan</h4>
+                            <div class="card-header" style="margin-top: -8px">
+                                <h4 style="font-size: 16px">Total Pemasukan Bulan Sekarang</h4>
                             </div>
                             <div class="card-body">
-                                {{ $total_pemasukan }}
+                                Rp. {{ number_format($total_pemasukan, 0, ',', '.') }}
                             </div>
                         </div>
                     </div>
@@ -66,11 +66,47 @@
                             <i class="fas fa-circle"></i>
                         </div>
                         <div class="card-wrap">
-                            <div class="card-header">
-                                <h4>Total Order</h4>
+                            <div class="card-header" style="margin-top: -8px">
+                                <h4 style="font-size: 16px">Total Order Bulan Sekarang</h4>
                             </div>
                             <div class="card-body">
                                 {{ $order }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-12 col-sm-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4 style="font-size: 20px">Grafik Pendapatan</h4>
+                        </div>
+                        <div class="card-body">
+                            <canvas id="myChartss" height="182"></canvas>
+                            <div class="statistic-details mt-sm-4">
+                                <div class="statistic-details-item">
+                                    <div class="detail-value" style="font-size: 25px">Rp
+                                        {{ number_format($today_sale, 0, ',', '.') }}</div>
+                                    <div class="detail-name" style="font-size: 16px">Penjualan Hari Ini</div>
+                                </div>
+                                <div class="statistic-details-item">
+                                    <div class="detail-value" style="font-size: 25px">Rp
+                                        {{ number_format($week_sale, 0, ',', '.') }}</div>
+                                    <div class="detail-name" style="font-size: 16px">Penjualan Minggu Ini</div>
+                                </div>
+                                <div class="statistic-details-item">
+                                    {{-- <span class="text-muted"><span class="text-primary"><i
+                                                class="fas fa-caret-up"></i></span>9%</span> --}}
+                                    <div class="detail-value" style="font-size: 25px">Rp
+                                        {{ number_format($month_sale, 0, ',', '.') }}</div>
+                                    <div class="detail-name" style="font-size: 16px">Penjualan Bulan Ini</div>
+                                </div>
+                                <div class="statistic-details-item">
+                                    <div class="detail-value" style="font-size: 25px">Rp
+                                        {{ number_format($year_sale, 0, ',', '.') }}</div>
+                                    <div class="detail-name" style="font-size: 16px">Penjualan Tahun Ini</div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -91,4 +127,79 @@
 
     <!-- Page Specific JS File -->
     <script src="{{ asset('js/page/index-0.js') }}"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var weeklyIncomeData = {!! json_encode($weeklyIncomeData) !!};
+            var labels = [];
+            var datasets = [];
+            Object.keys(weeklyIncomeData).forEach(function(kasirName) {
+                var data = [];
+                Object.keys(weeklyIncomeData[kasirName]).forEach(function(date) {
+                    var formattedDate = new Date(date).toLocaleDateString('en-GB', {
+                        day: '2-digit',
+                        month: 'short'
+                    });
+                    if (!labels.includes(formattedDate)) {
+                        labels.push(
+                            formattedDate);
+                    }
+                    data.push(weeklyIncomeData[kasirName][
+                        date
+                    ]);
+                });
+                datasets.push({
+                    label: 'Total pemasukan - ' + kasirName,
+                    data: data,
+                    backgroundColor: 'rgba(' + Math.floor(Math.random() * 256) + ',' + Math.floor(
+                        Math.random() * 256) + ',' + Math.floor(Math.random() * 256) + ', 0.2)',
+                    borderColor: 'rgba(' + Math.floor(Math.random() * 256) + ',' + Math.floor(Math
+                        .random() * 256) + ',' + Math.floor(Math.random() * 256) + ', 1)',
+                    borderWidth: 1,
+                    fill: false
+                });
+            });
+
+            var ctx = document.getElementById('myChartss').getContext('2d');
+            var myChartss = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: datasets
+                },
+                options: {
+                    scales: {
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero: true,
+                                fontSize: 16,
+                                callback: function(value, index, values) {
+                                    return 'Rp ' + value.toString().replace(
+                                        /\B(?=(\d{3})+(?!\d))/g, ",");
+                                }
+                            },
+                        }],
+                        xAxes: [{
+                            ticks: {
+                                fontSize: 16
+                            }
+                        }]
+                    },
+                    tooltips: {
+                        callbacks: {
+                            label: function(tooltipItem, data) {
+                                var value = data.datasets[tooltipItem.datasetIndex].data[tooltipItem
+                                    .index];
+                                return 'Rp ' + value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                            }
+                        }
+                    },
+                    legend: {
+                        labels: {
+                            fontSize: 16
+                        }
+                    }
+                }
+            });
+        });
+    </script>
 @endpush

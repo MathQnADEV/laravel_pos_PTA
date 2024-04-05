@@ -28,7 +28,7 @@ class ProductController extends Controller
             'name' => 'required|min:3|unique:products',
             'price' => 'required|integer',
             'stock' => 'required|integer',
-            'category' => 'required|in:food,drink,snack',
+            'category' => 'required|in:food,drink,snack,other',
             'image' => 'required|image|mimes:png,jpg,jpeg'
         ]);
         $filename = time() . '.' . $request->image->extension();

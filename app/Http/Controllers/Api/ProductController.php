@@ -43,7 +43,7 @@ class ProductController extends Controller
             'stock' => (int) $request->stock,
             'category' => $request->category,
             'image' => $filename,
-            'is_favorite'=> $request->is_favorite,
+            'is_favorite' => $request->is_favorite,
         ]);
 
         if ($product) {
@@ -58,29 +58,5 @@ class ProductController extends Controller
                 "message" => "Product Failed To Save"
             ], 409);
         }
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
     }
 }
